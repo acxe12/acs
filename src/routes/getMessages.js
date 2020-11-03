@@ -11,7 +11,7 @@ export const getMessages = async (token, threadId) => {
     let nextMessage = await pagedAsyncIterableIterator.next();
     while (!nextMessage.done) {
         messages.push(nextMessage.value);
-        console.log('!!!!!! MESSAGE !!!!!!')
+        // console.log('!!!!!! MESSAGE !!!!!!')
         let chatMessage = nextMessage.value;
         // console.log(`Message :${chatMessage.content}`);
         nextMessage = await pagedAsyncIterableIterator.next();

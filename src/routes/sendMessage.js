@@ -19,5 +19,6 @@ export const sendMessage = async (token, threadId, name, message) => {
     let sendChatMessageResult = await chatThreadClient.sendMessage(sendMessageRequest, sendMessageOptions);
     let messageId = sendChatMessageResult.id;
     console.log(`Message sent!, message id:${messageId}`);
-    return messageId;
+    let response = { "messageId": messageId };
+    return response;
 }

@@ -17,5 +17,6 @@ export const addMember = async (token, threadId, name, userId) => {
     };
 
     const response = await chatThreadClient.addMembers(addMembersRequest);
+    console.log(JSON.stringify(response));
     return response;
 }

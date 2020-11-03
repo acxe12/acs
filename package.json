@@ -16,6 +16,7 @@
     "@azure/communication-chat": "^1.0.0-beta.2",
     "@azure/communication-common": "^1.0.0-beta.2",
     "@azure/communication-signaling": "^1.0.0-beta.1",
+    "@azure/service-bus": "^7.0.0-preview.7",
     "@babel/runtime": "^7.11.2",
     "body-parser": "^1.19.0",
     "esm": "^3.2.25",
