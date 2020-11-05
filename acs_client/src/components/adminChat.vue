@@ -1,18 +1,19 @@
 <template>
-  <div class="container">
+  <div id="admin-container" class="container">
     <div class="row">
       <div class="mrgnbtm">
         <h2>Admin in action</h2>
-        <div>User ID: {{ userId }}</div>
-        <div>User Name: {{ userName }}</div>
-        <div>ThreadId: {{ threadId }}</div>
-
+        <div class="user-info">
+          <div>User ID: {{ userId }}</div>
+          <div>User Name: {{ userName }}</div>
+          <div>ThreadId: {{ threadId }}</div>
+        </div>
         <div>
           <textarea
             id="message-area"
             placeholder="chat messages will be here"
             v-model="messagesToShow"
-            cols="100"
+            cols="80"
             rows="20"
             readonly
           />
@@ -22,6 +23,7 @@
             id="message-input"
             type="text"
             placeholder="Enter you chat message here"
+            autocomplete="off"
             v-on:keyup.enter="sendMessage()"
             v-model="messageToSend"
           />

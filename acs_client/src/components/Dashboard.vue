@@ -124,7 +124,7 @@ export default {
       };
       receiveMessages(data).then((result) => {
         this.messages = prettifyMessages(result);
-        console.log(JSON.stringify(result));
+        // console.log(JSON.stringify(result));
       });
     },
     checkNotificationAdmin(data) {
@@ -148,10 +148,43 @@ export default {
 <style>
 .container {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  top: 5%;
+  left: 20%;
+  position: absolute;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+#user-container,
+#user-wait,
+#admin-container {
+  width: 40rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  border: 1px solid;
+  border-radius: 2rem;
+  padding: 10rem;
+  background-color: #2c3e50;
+  color: white;
+}
+#firstName {
+  background-color: #2c3e50;
+  border: 0;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+}
+.btn-create {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+}
+.user-info {
+  font-size: 0.8rem;
+  font-weight: 100;
+  margin-bottom: 1;
+}
+#message-area {
+  margin-top: 2rem;
 }
 </style>

@@ -1,26 +1,27 @@
 
 <template>
-  <div class="container">
+  <div id="user-container" class="container">
     <div class="row">
       <div class="col-md-7 mrgnbtm">
-        <h2>Your Name</h2>
-        <form>
-          <div class="row">
-            <label for="exampleInputFirstName">Name</label>
-            <input
-              type="text"
-              class="form-control"
-              v-model="firstName"
-              name="firstname"
-              id="firstname"
-              aria-describedby="emailHelp"
-              placeholder="First Name"
-            />
-          </div>
-          <button type="button" @click="createUser()" class="btn btn-danger">
-            Create
-          </button>
-        </form>
+        <h2>Welcome to ACS Demo</h2>
+        <div class="row">
+          <span>Name: </span>
+          <input
+            type="text"
+            class="form-control"
+            v-model="firstName"
+            name="firstname"
+            id="firstName"
+            aria-describedby="emailHelp"
+            placeholder="First Name"
+            autocomplete="off"
+            v-on:keyup.enter="createUser()"
+          />
+        </div>
+        <!--
+        <button type="button" @click="createUser()" class="btn-create">
+          Create
+        </button> -->
       </div>
     </div>
   </div>
@@ -31,7 +32,7 @@ export default {
   data() {
     return {
       firstName: "",
-      polling: null
+      polling: null,
     };
   },
   methods: {

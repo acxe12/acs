@@ -1,10 +1,13 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="mrgnbtm">
+      <div id="user-wait" class="mrgnbtm">
         <h2>User in action</h2>
         <div v-show="enabled">Waiting for admin</div>
-        <div v-show="!enabled">
+        <div v-show="enabled">
+          <img src="../assets/loading.gif" />
+        </div>
+        <div v-show="!enabled" class="user-info">
           <div>User ID: {{ userId }}</div>
           <div>User Name: {{ userName }}</div>
           <div>Thread ID: {{ threadId }}</div>
@@ -14,7 +17,7 @@
               id="message-area"
               placeholder="chat messages will be here"
               v-model="messagesToShow"
-              cols="100"
+              cols="80"
               rows="20"
               readonly
             />
@@ -24,6 +27,7 @@
               id="message-input"
               type="text"
               placeholder="Enter you chat message here"
+              autocomplete="off"
               v-on:keyup.enter="sendMessage()"
               v-model="messageToSend"
             />

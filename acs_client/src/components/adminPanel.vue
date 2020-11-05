@@ -1,10 +1,15 @@
 <template>
-  <div class="container">
+  <div id="admin-container" class="container">
     <div class="row">
       <div class="col-md-7 mrgnbtm">
         <h2>I am admin</h2>
         <div v-show="enabled">Waiting for user</div>
-        <div>{{ userId }}, {{ userName }}</div>
+        <div v-show="enabled">
+          <img src="../assets/loading.gif" />
+        </div>
+        <div class="user-info" v-show="!enabled">
+          {{ userId }}, {{ userName }}
+        </div>
         <form>
           <button
             type="button"
