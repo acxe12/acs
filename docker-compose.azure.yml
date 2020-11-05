@@ -8,6 +8,6 @@ services:
 
   server:
     image: acxe12.azurecr.io/acs_server
-    container_name: acs_client:latest
+    container_name: acs_server:latest
     ports:
         - "8000:8000"
