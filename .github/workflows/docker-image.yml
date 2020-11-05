@@ -25,10 +25,10 @@ jobs:
       - name: 'Build and Push Server'
         working-directory: ./acs_server
         run: |
-          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_server:${{ github.sha }}
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_server:${{ github.sha }} 
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_server:latest
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_server:latest
       - name: 'Build and Push Client'
         working-directory: ./acs_client
         run: |
-          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_client:${{ github.sha }}
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_client:${{ github.sha }} 
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_client:latest
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_client:latest 
