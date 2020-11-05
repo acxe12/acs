@@ -22,7 +22,9 @@ jobs:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-      - run: |
+      - name: 'Build and Push'
+        working-directory: ./acs_server
+        run: |
           docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_server:${{ github.sha }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_server:${{ github.sha }} 
 
