@@ -8,11 +8,12 @@ on:
 
 jobs:
 
-  build:
+  server-build:
 
     runs-on: ubuntu-latest
-
+    env:
+      working-directory: ./acs_server 
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file ./acs_server/Dockerfile --tag acs_server:$(date +%s)
+      run: docker build . --file Dockerfile --tag acs_server:$(date +%s)
