@@ -10,7 +10,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - working-directory: ./acs_server
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@v2
       - name: 'Login via Azure CLI'
