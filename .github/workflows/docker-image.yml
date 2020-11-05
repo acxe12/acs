@@ -7,16 +7,26 @@ on:
     branches: [ master ]
 
 jobs:
-
-  server-build:
-
-    runs-on: ubuntu-latest 
+  build-and-deploy:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image for server
-      working-directory: ./acs_server
-      run: docker build . --file Dockerfile --tag acs_server:$(date +%s)
-      
+      - working-directory: ./acs_server
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v2
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: 'Build and push image for server'
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - run: |
+          docker build . --file Dockerfile ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_server:${{ github.sha }} --tag acs_server:latest
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_server:${{ github.sha }} 
+
   client-build:
     runs-on: ubuntu-latest
     steps:
