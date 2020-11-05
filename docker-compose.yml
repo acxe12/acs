@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  client:
+    build: ./acs_client
+    ports:
+      - 8080:80
+    volumes:
+      - ./client:/app
+
+
+  server:
+    build: ./acs_server
+    ports:
+      - 8000:8000
+    volumes:
+      - ./server:/app
+    env_file:
+    - ./acs_server/prod.env
