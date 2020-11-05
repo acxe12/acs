@@ -29,6 +29,7 @@ routes.post('/api/thread', async (req, res, next) => {
     let token = req.body.token;
     let topic = req.body.topic;
     let name = req.body.name;
+    console.log(JSON.stringify(req.body));
     const threadId = await createChatThread(userId, token, topic, name);
     let response = { "threadId": threadId };
     res.status(200).json(response);

@@ -1,15 +1,17 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import routes from './routes';
+import cors from 'cors';
+
 
 //import { provideToken } from '/routes/provideToken.js';
 
 const app = express();
-
+app.use(cors());
+app.options('*', cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', routes);
-
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {

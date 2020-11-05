@@ -130,7 +130,7 @@ export default {
     checkNotificationAdmin(data) {
       checkNotificationFromSB(data).then((response) => {
         console.log("Polled for Notification: " + JSON.stringify(response));
-        if (data.queueName == "users" && this.userId == "") {
+        if (data.queueName == "users" && response.userId !== "") {
           this.userId = response.userId;
           this.userName = response.userName;
         }
