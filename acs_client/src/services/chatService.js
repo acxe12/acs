@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const API_BASE_URL = "api/"
+export const API_BASE_URL = "api"
 //process.env.VUE_APP_API_BASE_URL;
 
 export async function createUser(data) {
