@@ -5,3 +5,4 @@ logs
 npm-debug.log*
 pids
 prod.env
+.DS_Store
