@@ -6,3 +6,4 @@ npm-debug.log*
 pids
 prod.env
 .DS_Store
+.docker-compose.azure.yml
