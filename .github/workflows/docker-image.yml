@@ -13,6 +13,14 @@ jobs:
     runs-on: ubuntu-latest 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
+    - name: Build the Docker image for server
       working-directory: ./acs_server
       run: docker build . --file Dockerfile --tag acs_server:$(date +%s)
+      
+  client-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Docker image for client
+        working-directory: ./acs_client
+        run: docker build . --file Dockerfile --tag acs:client:$(date +%s)
