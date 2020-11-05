@@ -22,16 +22,13 @@ jobs:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: 'Build and Push'
+      - name: 'Build and Push Server'
         working-directory: ./acs_server
         run: |
           docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_server:${{ github.sha }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_server:${{ github.sha }} 
-
-  client-build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build the Docker image for client
+      - name: 'Build and Push Client'
         working-directory: ./acs_client
-        run: docker build . --file Dockerfile --tag acs_client:$(date +%s)
+        run: |
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_client:${{ github.sha }}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/acs_client:${{ github.sha }} 
