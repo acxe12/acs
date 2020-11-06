@@ -2,6 +2,8 @@ version: "3"
 
 services:
   client:
+    depends_on: 
+      - server
     build: ./acs_client
     ports:
       - 80:80
@@ -11,6 +13,8 @@ services:
 
   server:
     build: ./acs_server
+    environment:
+      VUE_APP_API_BASE_URL: server:8000
     ports:
       - 8000:8000
     volumes:
