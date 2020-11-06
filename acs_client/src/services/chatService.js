@@ -4,7 +4,6 @@ export const API_BASE_URL = process.env.VUE_APP_API_BASE_URL;
 
 export async function createUser(data) {
     try {
-
         const res = await axios(API_BASE_URL + "/token?name=" + data.firstName);
         console.log("User created: " + res.data.userId);
         return res.data;
