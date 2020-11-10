@@ -227,12 +227,6 @@ export default {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 100;
 }
-#message-area {
-  outline: none;
-  resize: none;
-  overflow: auto;
-  font-family: Verdana, sans-serif;
-}
 #message-input {
   width: 20rem;
   margin: 1rem;
