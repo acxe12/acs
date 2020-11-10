@@ -42,10 +42,10 @@
 </template>
 
 <script>
-import CreateUser from "./createUser";
-import UserChat from "./userChat";
-import AdminPanel from "./adminPanel";
-import AdminChat from "./adminChat";
+import CreateUser from "./CreateUser";
+import UserChat from "./UserChat";
+import AdminPanel from "./AdminPanel";
+import AdminChat from "./AdminChat";
 import {
   createUser,
   checkNotificationFromSB,
@@ -186,5 +186,66 @@ export default {
 }
 #message-area {
   margin-top: 2rem;
+}
+#message-canvas {
+  width: 40rem;
+  height: 20rem;
+  overflow-y: auto;
+  border: 1px solid white;
+  border-radius: 2%;
+  font-size: 0.7rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.message-admin {
+  color: black;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 5%;
+  clear: both;
+  margin: 0.5rem 0.5rem 0.1rem 0.5rem;
+  padding: 0.2rem;
+}
+.message-user {
+  color: #336699;
+  background-color: burlywood;
+  border: 1px solid burlywood;
+  border-radius: 5%;
+  clear: both;
+  margin: 0.5rem 0.2rem 0.1rem 0.5rem;
+  padding: 0.2rem;
+}
+.message-time {
+  margin-right: 0.2rem;
+}
+.message-author {
+  clear: right;
+  color: darkcyan;
+}
+.message-text {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 100;
+}
+#message-area {
+  outline: none;
+  resize: none;
+  overflow: auto;
+  font-family: Verdana, sans-serif;
+}
+#message-input {
+  width: 20rem;
+  margin: 1rem;
+}
+#message-submit {
+  width: 5rem;
+  height: auto;
+  border: 1px solid black;
+  border-radius: 4px;
+  transition-duration: 1s;
+}
+#message-submit:hover {
+  background-color: #4caf60;
+  color: white;
 }
 </style>

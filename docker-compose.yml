@@ -19,3 +19,16 @@ services:
       - ./server:/app
     env_file:
     - ./acs_server/prod.env
+    ports:
+      - "8000:8000"
+
+  server-test:
+    image: postman/newman
+    depends_on:
+      - server
+    entrypoint: [""]
+    volumes:
+      - ./acs_server/src/test/api:/etc/newman
+    command: >
+        sh -c "npm install -g newman-reporter-htmlextra &&
+        newman run acsTest2.postman_collection.json -r -e acs_test_docker.postman_environment.json --delay-request 5000 --suppress-exit-code 1 --reporters cli,html --reporter-json-export apitestsresult.html"

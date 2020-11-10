@@ -137,7 +137,8 @@ export function prettifyMessages(ar) {
     for (let i = 0, len = ar.length; i < len; i++) {
         if (ar[i].type == 'Text') {
             let time = new Date(ar[i].createdOn).toLocaleTimeString();
-            str = time + ' ' + ar[i].senderDisplayName + ' said ' + ar[i].content + '\n' + str;
+            let classForText = (ar[i].senderDisplayName == 'admin') ? 'admin' : 'user';
+            str = str + `<div class="message-${classForText}"><span class="message-time">${time}</span><span class="message-author">${ar[i].senderDisplayName}</span><div class="message-text">${ar[i].content}</div></div>` + `\n`;
         }
 
     }

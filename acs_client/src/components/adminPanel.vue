@@ -56,7 +56,7 @@ export default {
         } else {
           clearInterval(this.pollingNotification);
         }
-      }, 15000);
+      }, 3000);
     },
   },
   beforeDestroy() {

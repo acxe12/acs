@@ -12,16 +12,7 @@
           <div>User Name: {{ userName }}</div>
           <div>Thread ID: {{ threadId }}</div>
 
-          <div>
-            <textarea
-              id="message-area"
-              placeholder="chat messages will be here"
-              v-model="messagesToShow"
-              cols="80"
-              rows="20"
-              readonly
-            />
-          </div>
+          <div id="message-canvas" v-html="messagesToShow"></div>
           <div>
             <input
               id="message-input"
@@ -114,24 +105,4 @@ export default {
 };
 </script>
 <style scoped>
-#message-area {
-  outline: none;
-  resize: none;
-  overflow: auto;
-}
-#message-input {
-  width: 20rem;
-  margin: 1rem;
-}
-#message-submit {
-  width: 5rem;
-  height: auto;
-  border: 1px solid black;
-  border-radius: 4px;
-  transition-duration: 1s;
-}
-#message-submit:hover {
-  background-color: #4caf60;
-  color: white;
-}
 </style>

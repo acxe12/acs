@@ -1,0 +1,777 @@
+{
+	"info": {
+		"_postman_id": "bc7e96e8-2484-4d11-8d10-3dad33189323",
+		"name": "acsTest2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getToken_user1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e27bdbc-ae97-4fb8-b3e6-fdc3d574faf8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check userid and token and save them\", function () {",
+							"    pm.expect(jsonData.userId).not.eq(undefined);",
+							"    pm.expect(jsonData.token).not.eq(undefined);",
+							"    pm.environment.set(\"userId1\", jsonData.userId);",
+							"    pm.environment.set(\"token1\", jsonData.token);",
+							"    pm.environment.set(\"name1\", \"John\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/token?name=John",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"token"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "John"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getToken_user2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d9fe437-16eb-4384-9b4b-c4663707857e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check userid and token and save them\", function () {",
+							"    pm.expect(jsonData.userId).not.eq(undefined);",
+							"    pm.expect(jsonData.token).not.eq(undefined);",
+							"    pm.environment.set(\"userId2\", jsonData.userId);",
+							"    pm.environment.set(\"token2\", jsonData.token);",
+							"    pm.environment.set(\"name2\", \"Mary\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/token",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Thread by user1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f631d2a5-a185-4aa6-9070-641e15da55b8",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check threadId and save it\", function () {",
+							"    pm.expect(jsonData.threadId).not.eq(undefined);",
+							"    pm.environment.set(\"threadId\", jsonData.threadId);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userId",
+							"value": "{{userId1}}",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "{{name1}}",
+							"type": "text"
+						},
+						{
+							"key": "topic",
+							"value": "ACS TEST",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/thread",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"thread"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User to Thread",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "01b61571-ea56-4f37-8f02-38d101cc184d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check status code of Add to thread\", function () {",
+							"    pm.expect(jsonData.multipleStatus[0].statusCode).eq(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "text"
+						},
+						{
+							"key": "threadId",
+							"value": "{{threadId}}",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "{{userId2}}",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "{{name2}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/member",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"member"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Message from User1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "24735e3f-82b6-45b9-b79f-2c69fe3d65a8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "{{name1}}",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "First ever message2",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "text"
+						},
+						{
+							"key": "threadId",
+							"value": "{{threadId}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/message",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Message from User2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e7626b20-fa97-4e51-aebd-922467b2948a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "{{name2}}",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "First ever message2",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "{{token2}}",
+							"type": "text"
+						},
+						{
+							"key": "threadId",
+							"value": "{{threadId}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/message",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Receive Messages",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e09a05b5-f333-49d8-9502-be51cd731493",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "text"
+						},
+						{
+							"key": "threadId",
+							"value": "{{threadId}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/messages",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Members",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b20d6083-5026-42a3-aa04-8e35128660d7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "text"
+						},
+						{
+							"key": "threadId",
+							"value": "{{threadId}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/members",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sendNotification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e27bdbc-ae97-4fb8-b3e6-fdc3d574faf8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "queueName",
+							"value": "users",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "8888",
+							"type": "text"
+						},
+						{
+							"key": "firstName",
+							"value": "admin",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/notification",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"notification"
+					],
+					"query": [
+						{
+							"key": "queueName",
+							"value": "users",
+							"disabled": true
+						},
+						{
+							"key": "userId",
+							"value": "admin",
+							"disabled": true
+						},
+						{
+							"key": "threadId",
+							"value": "admin",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "receiveNotification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e27bdbc-ae97-4fb8-b3e6-fdc3d574faf8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/notifications?queueName=users&userId=8888",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"notifications"
+					],
+					"query": [
+						{
+							"key": "queueName",
+							"value": "users"
+						},
+						{
+							"key": "userId",
+							"value": "8888"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sendUserNotification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e27bdbc-ae97-4fb8-b3e6-fdc3d574faf8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f2acc992-cce2-4262-8f8f-7ec544bf7f36",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "queueName",
+							"value": "threadcreated",
+							"type": "text"
+						},
+						{
+							"key": "threadId",
+							"value": "1111",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "222251",
+							"type": "text"
+						},
+						{
+							"key": "session",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/notification",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"notification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "receiveUserNotification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e27bdbc-ae97-4fb8-b3e6-fdc3d574faf8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check if notification exists\", function () {",
+							"    pm.expect(jsonData.threadId).not.eq(undefined);",
+							"    pm.expect(jsonData.userId).not.eq(undefined);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c3ae5cb2-7458-4221-b84a-845937b26967",
+						"exec": [
+							"function pausecomp(millis)",
+							" {",
+							"  var date = new Date();",
+							"  var curDate = null;",
+							"  do { curDate = new Date(); }",
+							"  while(curDate-date < millis);",
+							"}",
+							"",
+							"pausecomp(3000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/notifications?queueName=threadcreated&userId=222251&sessionId=1111&threadId=1111",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"notifications"
+					],
+					"query": [
+						{
+							"key": "queueName",
+							"value": "threadcreated"
+						},
+						{
+							"key": "userId",
+							"value": "222251"
+						},
+						{
+							"key": "sessionId",
+							"value": "1111"
+						},
+						{
+							"key": "threadId",
+							"value": "1111"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -7,8 +7,7 @@ import { addMember } from './routes/addMember.js';
 import { listMembers } from './routes/listMembers.js';
 import { receiveNotification } from './routes/receiveNotification.js';
 import { sendNotification } from './routes/sendNotification.js';
-import { receiveUserNotification } from './routes/receiveUserNotification.js';
-import { sendUserNotification } from './routes/sendUserNotification.js';
+
 const routes = Router();
 
 routes.get('/api', (req, res) => {
@@ -90,23 +89,5 @@ routes.post('/api/notification', async (req, res, next) => {
     console.log(notification);
     res.status(200).json(notification);
 });
-// routes.post('/api/usernotification', async (req, res, next) => {
-
-//     let queueName = req.body.queueName;
-//     let data = {
-//         threadId: req.body.threadId,
-//         userId: req.body.userId
-//     }
-//     const notification = await sendNotification(queueName, data);
-//     console.log(notification);
-//     res.status(200).json(notification);
-// });
-// routes.get('/api/usernotifications', async (req, res, next) => {
-//     let queueName = req.query.queueName;
-//     let userId = req.query.userId;
-//     const notification = await receiveNotification(queueName, userId);
-//     console.log(notification);
-//     res.status(200).json(notification);
-// });
 
 export default routes;

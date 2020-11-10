@@ -1,7 +1,7 @@
 {
   "name": "acs_test2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Azure Communication Services Demo - Server",
   "main": "index.js",
   "module": "main.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "build": "npm run clean && mkdir -p dist && babel src -s -D -d dist",
     "start": "npm run build && node dist/index.js"
   },
-  "author": "",
+  "author": "Nikolai Pavlov",
   "license": "ISC",
   "dependencies": {
     "@azure/communication-administration": "^1.0.0-beta.2",

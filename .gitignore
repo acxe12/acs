@@ -7,3 +7,4 @@ pids
 prod.env
 .DS_Store
 docker-compose.azureprod.yml
+apitestsresult.html
