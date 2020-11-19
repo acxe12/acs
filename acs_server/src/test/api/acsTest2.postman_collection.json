@@ -1,0 +1,741 @@
+{
+	"info": {
+		"_postman_id": "bc7e96e8-2484-4d11-8d10-3dad33189323",
+		"name": "acsTest2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getToken_admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e27bdbc-ae97-4fb8-b3e6-fdc3d574faf8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check userid and token and save them\", function () {",
+							"    pm.expect(jsonData.userId).not.eq(undefined);",
+							"    pm.expect(jsonData.token).not.eq(undefined);",
+							"    pm.environment.set(\"userId1\", jsonData.userId);",
+							"    pm.environment.set(\"token1\", jsonData.token);",
+							"    pm.environment.set(\"name1\", \"admin\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/token?name=admin",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"token"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getToken_user2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d9fe437-16eb-4384-9b4b-c4663707857e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check userid and token and save them\", function () {",
+							"    pm.expect(jsonData.userId).not.eq(undefined);",
+							"    pm.expect(jsonData.token).not.eq(undefined);",
+							"    pm.environment.set(\"userId2\", jsonData.userId);",
+							"    pm.environment.set(\"token2\", jsonData.token);",
+							"    pm.environment.set(\"name2\", \"Mary\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/token?name=Mary",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"token"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Mary"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Thread by admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "61e426dd-21fa-43b3-b2ad-d52b871baf3d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check userid and token and save them\", function () {",
+							"    pm.expect(jsonData.threadId).not.eq(undefined);",
+							"    pm.environment.set(\"threadId\", jsonData.threadId);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userId",
+							"value": "{{userId1}}",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "{{name1}}",
+							"type": "text"
+						},
+						{
+							"key": "topic",
+							"value": "ACS TEST",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/thread",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"thread"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User to Thread",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "39346ed2-185c-41e8-a4a6-47d5aa7f6cb2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check userid and token and save them\", function () {",
+							"    pm.expect(jsonData.multipleStatus[0].statusCode).eq(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "text"
+						},
+						{
+							"key": "threadId",
+							"value": "{{threadId}}",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "{{userId2}}",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "{{name2}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/member",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"member"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Message from admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b91eb164-1856-41bc-b8db-aaaa768d4d8b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check userid and token and save them\", function () {",
+							"    pm.expect(jsonData.messageId).not.eq(undefined);",
+							"    pm.environment.set(\"firstMessageId\", jsonData.messageId);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "{{name1}}",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "First ever message",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "text"
+						},
+						{
+							"key": "threadId",
+							"value": "{{threadId}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/message",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Message from User2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e7626b20-fa97-4e51-aebd-922467b2948a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check userid and token and save them\", function () {",
+							"    pm.expect(jsonData.messageId).not.eq(undefined);",
+							"    pm.environment.set(\"secondMessageId\", jsonData.messageId);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "{{name2}}",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "First ever message2",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "{{token2}}",
+							"type": "text"
+						},
+						{
+							"key": "threadId",
+							"value": "{{threadId}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/message",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Receive Messages",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e7d0f029-6a33-4772-85ae-811f963d6954",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Both messages should be sent\", function () {",
+							"var jsonData = pm.response.json();",
+							"let message1 = false;",
+							"let message2 = false;",
+							"let firstMessageId = pm.variables.get('firstMessageId');",
+							"let secondMessageId = pm.variables.get('secondMessageId');",
+							"jsonData.forEach(msg => {",
+							"    message1 = (msg.id == firstMessageId) ? true : false;",
+							"    message2 = (msg.id == secondMessageId) ? true : false;",
+							"}) ",
+							"pm.expect(message1 && message2);",
+							"",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "text"
+						},
+						{
+							"key": "threadId",
+							"value": "{{threadId}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/messages",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Members",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e6ba000-4619-43a2-a903-f8c24b655f62",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"let admin = false;",
+							"let user = false;",
+							"let userId1 = pm.variables.get('userId1');",
+							"let userId2 = pm.variables.get('userId2');",
+							"pm.test(\"Both members should be present\", function () {",
+							"    jsonData.forEach(member => {",
+							"    admin = (member.id == userId1) ? true : false;",
+							"    user = (member.id == userId2) ? true : false;",
+							"}) ",
+							"pm.expect(admin && user);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "text"
+						},
+						{
+							"key": "threadId",
+							"value": "{{threadId}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/members",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "receiveNotification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e27bdbc-ae97-4fb8-b3e6-fdc3d574faf8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"let boolUserName = false;",
+							"let boolUserId = false;",
+							"let userId = pm.variables.get('userId2');",
+							"let userName = pm.variables.get('name2');",
+							"var jsonData = pm.response.json();",
+							"pm.test(\"Correct username and userId in notification\", function () {",
+							"",
+							"    boolUserId = (jsonData.userId == userId) ? true : false;",
+							"    boolUserName = (jsonData.userName == userName) ? true : false;",
+							"pm.expect(boolUserId && boolUserName);",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/notifications?queueName=users",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"notifications"
+					],
+					"query": [
+						{
+							"key": "queueName",
+							"value": "users"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sendUserNotification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e27bdbc-ae97-4fb8-b3e6-fdc3d574faf8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Message should be delivered\", function() {",
+							"    pm.expect(jsonData.Message == \"Delivered\");",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f2acc992-cce2-4262-8f8f-7ec544bf7f36",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "queueName",
+							"value": "threadcreated",
+							"type": "text"
+						},
+						{
+							"key": "threadId",
+							"value": "{{threadId}}",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "{{userId1}}",
+							"type": "text"
+						},
+						{
+							"key": "session",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/notification",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"notification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "receiveUserNotification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e27bdbc-ae97-4fb8-b3e6-fdc3d574faf8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"let threadId = pm.variables.get(\"threadId\");",
+							"let userId = pm.variables.get(\"userId1\");",
+							"pm.test(\"Check if notification exists\", function () {",
+							"    pm.expect(jsonData.threadId).eq(threadId);",
+							"    pm.expect(jsonData.userId).eq(userId);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c3ae5cb2-7458-4221-b84a-845937b26967",
+						"exec": [
+							"function pausecomp(millis)",
+							" {",
+							"  var date = new Date();",
+							"  var curDate = null;",
+							"  do { curDate = new Date(); }",
+							"  while(curDate-date < millis);",
+							"}",
+							"",
+							"pausecomp(3000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/notifications?queueName=threadcreated&userId={{userId1}}&sessionId={{userId1}}&threadId={{threadId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"notifications"
+					],
+					"query": [
+						{
+							"key": "queueName",
+							"value": "threadcreated"
+						},
+						{
+							"key": "userId",
+							"value": "{{userId1}}"
+						},
+						{
+							"key": "sessionId",
+							"value": "{{userId1}}"
+						},
+						{
+							"key": "threadId",
+							"value": "{{threadId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
