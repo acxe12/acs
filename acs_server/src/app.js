@@ -24,9 +24,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     res
         .status(err.status || 500)
-        .render('error', {
-            message: err.message
-        });
+        .json({ "Error:": "Invalid API route" })
 });
 
 export default app;
